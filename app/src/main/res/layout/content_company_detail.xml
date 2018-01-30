@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="ae.lateston.uaecompanies.model.Company" />
+
+        <variable
+            name="isMapLock"
+            type="boolean" />
+
+        <variable
+            name="company"
+            type="ae.lateston.uaecompanies.model.Company" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_horizontal_margin_half">
+
+            <TextView
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                android:drawableStart="@drawable/ic_comp_cat"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOther"
+                android:textDirection="locale"
+                android:textSize="@dimen/small.txt.size"
+                app:categories="@{company.categories}"
+                app:font="@{@string/font_name_myriadpro_regular}"
+                tools:targetApi="ice_cream_sandwich" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorDetailDivider" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                android:drawableStart="@drawable/ic_comp_loc"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="2"
+                android:text="@{company.addressEn ?? ``}"
+                android:textColor="@color/colorTextOther"
+                android:textDirection="locale"
+                android:textSize="@dimen/small.txt.size"
+                android:visibility="@{(company.addressEn==null || company.addressEn.length()==0)  ? View. GONE : View.VISIBLE}"
+                app:font="@{@string/font_name_myriadpro_regular}"
+                tools:targetApi="ice_cream_sandwich" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                android:drawableStart="@drawable/ic_comp_email"
+                android:gravity="center_vertical"
+                android:text="@{company.email ?? ``}"
+                android:textDirection="locale"
+                android:textSize="@dimen/small.txt.size"
+                android:visibility="@{(company.email==null || company.email.length()==0)  ? View. GONE : View.VISIBLE}"
+                app:font="@{@string/font_name_myriadpro_regular}" />
+
+            <TextView
+                android:id="@+id/tvWeb"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                android:drawableStart="@drawable/ic_comp_web"
+                android:gravity="center_vertical"
+                android:text="@{company.url ?? ``}"
+                android:textDirection="locale"
+                android:textSize="@dimen/small.txt.size"
+                android:visibility="@{(company.url==null || company.url.length()==0) ? View. GONE : View.VISIBLE}"
+                app:font="@{@string/font_name_myriadpro_regular}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_weight="0.5"
+                    android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                    android:drawableStart="@drawable/ic_comp_ph"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text="@{company.phone ?? ``}"
+                    android:textDirection="locale"
+                    android:textSize="@dimen/small.txt.size"
+                    android:visibility="@{(company.phone==null || company.phone.length()==0) ? View. GONE : View.VISIBLE}"
+                    app:font="@{@string/font_name_myriadpro_regular}" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/activity_horizontal_margin_half" />
+
+                <TextView
+                    android:id="@+id/tvMob"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                    android:layout_weight="0.5"
+                    android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                    android:drawableStart="@drawable/ic_comp_mob"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text="@{company.mobile ?? ``}"
+                    android:textDirection="locale"
+                    android:textSize="@dimen/small.txt.size"
+                    android:visibility="@{(company.mobile==null || company.mobile.length()==0) ? View. GONE : View.VISIBLE}"
+                    app:font="@{@string/font_name_myriadpro_regular}" />
+
+            </LinearLayout>
+
+            <TextView
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+                android:drawablePadding="@dimen/activity_horizontal_margin_half"
+                android:drawableStart="@drawable/ic_comp_fax"
+                android:gravity="center_vertical"
+                android:text="@{company.fax ?? ``}"
+                android:textDirection="locale"
+                android:textSize="@dimen/small.txt.size"
+                android:visibility="@{(company.fax==null || company.fax.length()==0) ? View. GONE : View.VISIBLE}"
+                app:font="@{@string/font_name_myriadpro_regular}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp">
+
+
+            <ae.lateston.uaecompanies.widgets.CustomFrameLayout
+                android:id="@+id/frame_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:id="@+id/lockView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#66000000"
+                    android:visibility="@{isMapLock ? View.VISIBLE : View.GONE}" />
+
+            </ae.lateston.uaecompanies.widgets.CustomFrameLayout>
+
+            <ImageButton
+                android:id="@+id/ibLock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/img.description"
+                android:padding="@dimen/activity_horizontal_margin_half"
+                android:src="@{isMapLock ? @drawable/ic_map_lock :@drawable/ic_map_unlock}" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorDetailDivider" />
+
+    </LinearLayout>
+</layout>

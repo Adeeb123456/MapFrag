@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="ae.lateston.uaecompanies.model.Company" />
+
+        <import type="ae.lateston.uaecompanies.model.CategoryItem" />
+
+        <variable
+            name="isList"
+            type="boolean" />
+
+        <variable
+            name="canShowLoader"
+            type="boolean" />
+
+        <variable
+            name="company"
+            type="ae.lateston.uaecompanies.model.Company" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/common_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#f4f4f4">
+
+                    <ImageButton
+                        android:id="@+id/ibCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/img.description"
+                        android:minWidth="56dp"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/ic_tab_globe" />
+
+                    <ImageButton
+                        android:id="@+id/ibSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/img.description"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/ic_tab_search" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_toEndOf="@id/ibCity"
+                        android:layout_toStartOf="@id/ibSearch"
+                        android:baselineAligned="false"
+                        android:clickable="false"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:gravity="center"
+                            app:myWeight="@{isList ? 1 : 2}">
+
+                            <ImageButton
+                                android:id="@+id/ibFilter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/img.description"
+                                android:padding="@dimen/activity_horizontal_margin"
+                                android:src="@drawable/ic_tab_filter" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:gravity="center"
+                            app:myWeight="@{isList ? 1 : 0}">
+
+                            <ImageButton
+                                android:id="@+id/ibSort"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/img.description"
+                                android:padding="@dimen/activity_horizontal_margin"
+                                android:src="@drawable/ic_tab_sort" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <android.support.v4.widget.SwipeRefreshLayout
+                        android:id="@+id/swipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="@{isList ? View.VISIBLE : View.GONE}"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rvCompany"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="@{isList ? View.GONE : View.VISIBLE}">
+
+                        <com.google.android.gms.maps.MapView
+                            android:id="@+id/mapView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <include
+                            android:id="@+id/itemCompany"
+                            layout="@layout/item_marker_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="@dimen/activity_horizontal_margin" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/nocom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:textSize="19sp"
+                android:visibility="gone"
+                android:textColor="@color/colorAccent"
+                android:text="@string/nocom"
+                />
+
+            <include
+                android:id="@+id/loader"
+                layout="@layout/loader_view"
+                app:canShowLoader="@{canShowLoader}" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
